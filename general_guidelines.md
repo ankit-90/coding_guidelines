@@ -27,3 +27,29 @@ int daysSinceCreation;
 int daysSinceModification;
 int fileAgeInDays;
 ```
+* **Use Pronounceable Names** Humans are good at words. A significant part of our brains is dedicated to the concept of
+words. And words are, by definition, pronounceable. It would be a shame not to take advantage of that huge portion of our brains that has evolved to deal with spoken language.
+So make your names pronounceable.
+
+If you can’t pronounce it, you can’t discuss it without sounding like an idiot. “Well,
+over here on the bee cee arr three cee enn tee we have a pee ess zee kyew int, see?” This
+matters because programming is a social activity.
+
+ Compare
+ ```java
+class DtaRcrd102 {
+private Date genymdhms;
+private Date modymdhms;
+private final String pszqint = "102";
+}
+```
+to
+```java
+class Customer {
+private Date generationTimestamp;
+private Date modificationTimestamp;;
+private final String recordId = "102";
+/* ... */
+}```
+Intelligent conversation is now possible: “Hey, Mikey, take a look at this record! The generation
+timestamp is set to tomorrow’s date! How can that be?”
