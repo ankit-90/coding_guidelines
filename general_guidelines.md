@@ -38,17 +38,17 @@ matters because programming is a social activity.
  Compare
  ```java
 class DtaRcrd102 {
-private Date genymdhms;
-private Date modymdhms;
-private final String pszqint = "102";
+ private Date genymdhms;
+ private Date modymdhms;
+ private final String pszqint = "102";
 }
 ```
 to
 ```java
 class Customer {
-private Date generationTimestamp;
-private Date modificationTimestamp;;
-private final String recordId = "102";
+ private Date generationTimestamp;
+ private Date modificationTimestamp;;
+ private final String recordId = "102";
 }
 ```
 Intelligent conversation is now possible: “Hey, Mikey, take a look at this record! The generation
