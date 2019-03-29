@@ -53,3 +53,5 @@ class Customer {
 ```
 Intelligent conversation is now possible: “Hey, Mikey, take a look at this record! The generation
 timestamp is set to tomorrow’s date! How can that be?”
+
+* **Use Searchable Names** 
