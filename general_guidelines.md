@@ -336,3 +336,46 @@ This last is an example of the keyword form of a function name. Using this form 
 encode the names of the arguments into the function name. For example, *assertEquals*
 might be better written as *assertExpectedEqualsActual(expected, actual)*. This strongly
 mitigates the problem of having to remember the ordering of the arguments.
+
+* **Have No Side Effects**
+Side effects are lies. Your function promises to do one thing, but it also does other hidden
+things. Sometimes it will make unexpected changes to the variables of its own class.
+Sometimes it will make them to the parameters passed into the function or to system globals.
+In either case they are devious and damaging mistruths that often result in strange
+temporal couplings and order dependencies.
+Consider, for example, the seemingly innocuous function in Listing 3-6. This function
+uses a standard algorithm to match a userName to a password. It returns true if they match
+and false if anything goes wrong. But it also has a side effect. Can you spot it?
+
+```java
+public class UserValidator {
+
+        private Cryptographer cryptographer;
+
+        public boolean checkPassword(String userName, String password) {
+            User user = UserGateway.findByName(userName);
+            if (user != User.NULL) {
+                String codedPhrase = user.getPhraseEncodedByPassword();
+                String phrase = cryptographer.decrypt(codedPhrase, password);
+                if ("Valid Password".equals(phrase)) {
+                    Session.initialize();
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+```
+
+The side effect is the call to Session.initialize(), of course. The checkPassword function,
+by its name, says that it checks the password. The name does not imply that it initializes
+the session. So a caller who believes what the name of the function says runs the risk
+of erasing the existing session data when he or she decides to check the validity of the
+user.
+This side effect creates a temporal coupling. That is, checkPassword can only be
+called at certain times (in other words, when it is safe to initialize the session). If it is
+called out of order, session data may be inadvertently lost. Temporal couplings are confusing,
+especially when hidden as a side effect. If you must have a temporal coupling,
+you should make it clear in the name of the function. In this case we might rename the
+function checkPasswordAndInitializeSession, though that certainly violates “Do one
+thing.”
