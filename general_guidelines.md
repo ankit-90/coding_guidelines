@@ -235,3 +235,26 @@ if(isSuccess(data)){
 * **Do One Thing**
 *FUNCTIONS SHOULD DO ONE THING. THEY SHOULD DO IT WELL.
 THEY SHOULD DO IT ONLY*. The problem with this statement is that it is hard to know what “one thing” is. 
+
+* **Use Descriptive Names**
+I changed the name of our example function from **testableHtml** to
+**SetupTeardownIncluder**. This is a far better name because it better describes what
+the function does. I also gave each of the private methods an equally descriptive name
+such as isTestable or includeSetupAndTeardownPages. It is hard to overestimate the value
+of good names. Remember Ward’s principle: “You know you are working on clean code
+when each routine turns out to be pretty much what you expected.” Half the battle to
+achieving that principle is choosing good names for small functions that do one thing.
+The smaller and more focused a function is, the easier it is to choose a descriptive
+name.
+Don’t be afraid to make a name long. A long descriptive name is better than a short
+enigmatic name. A long descriptive name is better than a long descriptive comment. Use
+a naming convention that allows multiple words to be easily read in the function names,
+and then make use of those multiple words to give the function a name that says what
+it does.
+
+Choosing descriptive names will clarify the design of the module in your mind and
+help you to improve it. It is not at all uncommon that hunting for a good name results in a
+favorable restructuring of the code.
+Be consistent in your names. Use the same phrases, nouns, and verbs in the function
+names you choose for your modules. Consider, for example, the names *includeSetupAndTeardownPages,
+includeSetupPages, includeSuiteSetupPage, and includeSetupPage*.
