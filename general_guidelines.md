@@ -848,3 +848,31 @@ completely removed.
 * **Noise Comments**
 Sometimes you see comments that are nothing but noise. They restate the obvious and
 provide no new information.
+
+```java
+/**
+ * Default constructor.
+ */
+protected AnnualDateRule() {
+}
+```
+No, really? Or how about this:
+
+```java
+/** The day of the month. */
+ private int dayOfMonth;
+```
+And then there’s this paragon of redundancy:
+
+```java
+ * Returns the day of the month.
+ *
+ * @return the day of the month.
+ */
+public int getDayOfMonth() {
+ return dayOfMonth;
+}
+```
+These comments are so noisy that we learn to ignore them. As we read through code, our
+eyes simply skip over them. Eventually the comments begin to lie as the code around them
+changes.
