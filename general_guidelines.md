@@ -620,3 +620,42 @@ why a particular test case is turned off:
     }
 
 ```
+* **TODO Comments**
+It is sometimes reasonable to leave “To do” notes in the form of **//TODO comments**. In the
+following case, the TODO comment explains why the function has a degenerate implementation
+and what that function’s future should be. 
+
+```java
+ //TODO-MdM these are not needed
+    // We expect this to go away when we do the checkout model
+    protected VersionInfo makeVersion() throws Exception {
+        return null;
+    }
+```
+TODOs are jobs that the programmer thinks should be done, but for some reason
+can’t do at the moment. It might be a reminder to delete a deprecated feature or a
+plea for someone else to look at a problem. It might be a request for someone else to
+think of a better name or a reminder to make a change that is dependent on a
+planned event. Whatever else a TODO might be, it is not an excuse to leave bad code in
+the system.
+Nowadays, most good IDEs provide special gestures and features to locate all the
+TODO comments, so it’s not likely that they will get lost. Still, you don’t want your code
+to be littered with TODOs. So scan through them regularly and eliminate the ones you
+can.
+
+* **Amplification**
+A comment may be used to amplify the importance of something that may otherwise seem
+inconsequential.
+
+```java
+String listItemContent = match.group(3).trim();
+// the trim is real important. It removes the starting
+// spaces that could cause the item to be recognized
+// as another list.
+new
+
+    ListItemWidget(this,listItemContent, this.level +1);
+return
+
+    buildList(text.substring(match.end()));
+```
