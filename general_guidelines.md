@@ -110,3 +110,18 @@ is generally better than
 Complex fulcrumPoint = new Complex(23.0);
 ```
 Consider enforcing their use by making the corresponding constructors private.
+
+* **Don’t Be Cute**
+If names are too clever, they will be
+memorable only to people who share the
+author’s sense of humor, and only as long
+as these people remember the joke. Will
+they know what the function named
+*HolyHandGrenade* is supposed to do? Sure,
+it’s cute, but maybe in this case
+*DeleteItems* might be a better name.
+Choose clarity over entertainment value.
+Cuteness in code often appears in the form of colloquialisms or slang. For example,
+don’t use the name *whack()* to mean *kill()*. Don’t tell little culture-dependent jokes like
+*eatMyShorts()* to mean *abort()*.
+Say what you mean. Mean what you say.
