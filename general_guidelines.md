@@ -9,7 +9,7 @@ After years of experience of Software Development, I came to know that irrespect
  * Error/Exception Handling
  * Coding Myths
  
- # 2. Naming Conventions
+ # 2. Naming Convention
 Names are everywhere in software. We name our variables, our functions, our arguments,
 classes, and packages. We name our source files and the directories that contain them. We
 name our jar files and war files and ear files. We name and name and name. Because we do so much of it, we’d better do it well. What follows are some simple rules for creating
