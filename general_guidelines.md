@@ -81,3 +81,8 @@ Note that sum, above, is not a particularly useful name but at least is searchab
 intentionally named code makes for a longer function, but consider how much easier it
 will be to find **WORK_DAYS_PER_WEEK** than to find all the places where 5 was used and filter
 the list down to just the instances with the intended meaning.
+
+* **Class Names**
+Classes and objects should have noun or noun phrase names like *Customer, WikiPage,
+Account, and AddressParser*. Avoid words like *Manager, Processor, Data, or Info* in the name
+of a class. A class name should not be a verb.
