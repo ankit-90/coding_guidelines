@@ -379,3 +379,29 @@ especially when hidden as a side effect. If you must have a temporal coupling,
 you should make it clear in the name of the function. In this case we might rename the
 function checkPasswordAndInitializeSession, though that certainly violates “Do one
 thing.”
+
+* **Output Arguments**
+Arguments are most naturally interpreted as inputs to a function. If you have been programming
+for more than a few years, I’m sure you’ve done a double-take on an argument
+that was actually an output rather than an input. For example:
+```java
+appendFooter(s);
+```
+Does this function append s as the footer to something? Or does it append some footer
+to s? Is s an input or an output? It doesn’t take long to look at the function signature
+and see:
+```java
+public void appendFooter(StringBuffer report)
+```
+This clarifies the issue, but only at the expense of checking the declaration of the function.
+Anything that forces you to check the function signature is equivalent to a double-take. It’s
+a cognitive break and should be avoided.
+In the days before object oriented programming it was sometimes necessary to have
+output arguments. However, much of the need for output arguments disappears in OO languages
+because this is intended to act as an output argument. In other words, it would be
+better for appendFooter to be invoked as
+```java
+report.appendFooter();
+```
+In general output arguments should be avoided. If your function must change the state
+of something, have it change the state of its owning object. 
