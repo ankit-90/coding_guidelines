@@ -86,3 +86,17 @@ the list down to just the instances with the intended meaning.
 Classes and objects should have noun or noun phrase names like *Customer, WikiPage,
 Account, and AddressParser*. Avoid words like *Manager, Processor, Data, or Info* in the name
 of a class. A class name should not be a verb.
+
+* **Method Names**
+Methods should have verb or verb phrase names like *postPayment, deletePage, or save.
+Accessors, mutators, and predicates* should be named for their value and prefixed with *get,
+set, and is according to the javabean standard*.
+
+```java
+String name = employee.getName();
+customer.setName("mike");
+if (paycheck.isPosted()){
+   ------
+   ------
+}
+```
