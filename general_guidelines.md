@@ -953,3 +953,161 @@ noisy train of slashes at the end.
 Think of it this way. A banner is startling and obvious if you don’t see banners very
 often. So use them very sparingly, and only when the benefit is significant. If you overuse
 banners, they’ll fall into the background noise and be ignored.
+
+* **Closing Brace Comments**
+
+Sometimes programmers will put special comments on closing braces, as in example below.
+Although this might make sense for long functions with deeply nested structures, it serves
+only to clutter the kind of small and encapsulated functions that we prefer. So if you find
+yourself wanting to mark your closing braces, try to shorten your functions instead.
+
+```java
+public class wc {
+    public static void main(String[] args) {
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        int lineCount = 0;
+        int charCount = 0;
+        int wordCount = 0;
+        try {
+            while ((line = in.readLine()) != null) {
+                lineCount++;
+                charCount += line.length();
+                String words[] = line.split("\\W");
+                wordCount += words.length;
+            } //while
+            System.out.println("wordCount = " + wordCount);
+            System.out.println("lineCount = " + lineCount);
+            System.out.println("charCount = " + charCount);
+        } // try
+        catch (IOException e) {
+            System.err.println("Error:" + e.getMessage());
+        } //catch
+    } //main
+}
+```
+
+* **Attributions and Bylines**
+```java
+/* Added by Rick */
+```
+Source code control systems are very good at remembering who added what, when.
+There is no need to pollute the code with little bylines. You might think that such comments
+would be useful in order to help others know who to talk to about the code. But the
+reality is that they tend to stay around for years and years, getting less and less accurate
+and relevant.
+Again, the source code control system is a better place for this kind of information.
+
+* **Commented-Out Code**
+Few practices are as odious as commenting-out code. Don’t do this!
+
+```java
+InputStreamResponse response = new InputStreamResponse();
+response.setBody(formatter.getResultStream(), formatter.getByteCount());
+// InputStream resultsStream = formatter.getResultStream();
+// StreamReader reader = new StreamReader(resultsStream);
+// response.setContent(reader.read(formatter.getByteCount()));
+```
+Others who see that commented-out code won’t have the courage to delete it. They’ll think
+it is there for a reason and is too important to delete. So commented-out code gathers like
+dregs at the bottom of a bad bottle of wine.
+
+* **HTML Comments**
+HTML in source code comments is an abomination, as you can tell by reading the code
+below. It makes the comments hard to read in the one place where they should be easy to
+read—the editor/IDE. If comments are going to be extracted by some tool (like Javadoc) to
+appear in a Web page, then it should be the responsibility of that tool, and not the programmer,
+to adorn the comments with appropriate HTML.
+
+```java
+/**
+ * Task to run fit tests.
+ * This task runs fitnesse tests and publishes the results.
+ * <p/>
+ * <pre>
+ * Usage:
+ * &lt;taskdef name=&quot;execute-fitnesse-tests&quot;
+ * classname=&quot;fitnesse.ant.ExecuteFitnesseTestsTask&quot;
+ * classpathref=&quot;classpath&quot; /&gt;
+ * OR
+ * &lt;taskdef classpathref=&quot;classpath&quot;
+ * resource=&quot;tasks.properties&quot; /&gt;
+ * <p/>
+ * &lt;execute-fitnesse-tests
+ * suitepage=&quot;FitNesse.SuiteAcceptanceTests&quot;
+ * fitnesseport=&quot;8082&quot;
+ * resultsdir=&quot;${results.dir}&quot;
+ * resultshtmlpage=&quot;fit-results.html&quot;
+ * classpathref=&quot;classpath&quot; /&gt;
+ * </pre>
+ */
+```
+
+* **Non Local Information**
+If you must write a comment, then make sure it describes the code it appears near. Don’t
+offer systemwide information in the context of a local comment. Consider, for example,
+the javadoc comment below. Aside from the fact that it is horribly redundant, it also offers
+information about the default port. And yet the function has absolutely no control over
+what that default is. The comment is not describing the function, but some other, far distant
+part of the system. Of course there is no guarantee that this comment will be changed
+when the code containing the default is changed.
+
+```java
+/**
+ * Port on which fitnesse would run. Defaults to <b>8082</b>.
+ *
+ * @param fitnessePort
+ */
+public void setFitnessePort(int fitnessePort){
+    this.fitnessePort = fitnessePort;
+}
+```
+
+* **Too Much Information**
+Don’t put interesting historical discussions or irrelevant descriptions of details into your
+comments. The comment below was extracted from a module designed to test that a function
+could encode and decode base64. Other than the RFC number, someone reading this
+code has no need for the arcane information contained in the comment. 
+
+```java
+/*
+ RFC 2045 - Multipurpose Internet Mail Extensions (MIME)
+ Part One: Format of Internet Message Bodies
+ section 6.8. Base64 Content-Transfer-Encoding
+ The encoding process represents 24-bit groups of input bits as output
+ strings of 4 encoded characters. Proceeding from left to right, a
+ 24-bit input group is formed by concatenating 3 8-bit input groups.
+ These 24 bits are then treated as 4 concatenated 6-bit groups, each
+ of which is translated into a single digit in the base64 alphabet.
+ When encoding a bit stream via the base64 encoding, the bit stream
+ must be presumed to be ordered with the most-significant-bit first.
+ That is, the first bit in the stream will be the high-order bit in
+ the first 8-bit byte, and the eighth bit will be the low-order bit in
+ the first 8-bit byte, and so on.
+ */
+```
+
+* **Inobvious Connection**
+The connection between a comment and the code it describes should be obvious. If you are
+going to the trouble to write a comment, then at least you’d like the reader to be able to
+look at the comment and the code and understand what the comment is talking about.
+Consider, for example, this comment drawn from apache commons:
+
+```java
+/*
+ * start with an array that is big enough to hold all the pixels
+ * (plus filter bytes), and an extra 200 bytes for header info
+ */
+ this.pngBytes = new byte[((this.width + 1) * this.height * 3) + 200];
+```
+What is a filter byte? Does it relate to the +1? Or to the *3? Both? Is a pixel a byte? Why
+200? The purpose of a comment is to explain code that does not explain itself. It is a pity
+when a comment needs its own explanation. 
+
+
+ * **Function Headers**
+ Short functions don’t need much description. A well-chosen name for a small function that
+does one thing is usually better than a comment header. 
+
+
