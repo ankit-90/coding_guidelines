@@ -142,8 +142,8 @@ don’t use the name *whack()* to mean *kill()*. Don’t tell little culture-dep
 *eatMyShorts()* to mean *abort()*.
 Say what you mean. Mean what you say.
 
-# 3 Functions
-Functions are the first line of organization in any program, Consider the following example:
+# 3. Functions
+Functions are the first line of organization in any program.Consider the following example:
 
 ```java
  public static String testableHtml(PageData pageData,boolean includeSuiteSetup) throws Exception {
@@ -181,4 +181,28 @@ Functions are the first line of organization in any program, Consider the follow
                 .append("\n");
         }
 }
+```
+ Not only is it long, but it’s got duplicated
+code, lots of odd strings, and many strange and inobvious data types and APIs. See how
+much sense you can make of it in the next three minutes. Do you understand the function after three minutes of study? Probably not. There’s
+too much going on in there at too many different levels of abstraction. There are strange
+strings and odd function calls mixed in with doubly nested if statements controlled by
+flags.
+
+* **Small**
+The first rule of functions is that they should be small. The second rule of functions is that
+they should be smaller than that. This is not an assertion that I can justify. I can’t provide
+any references to research that shows that very small functions are better. What I can tell
+you is that for nearly 5 years I have written functions of all different sizes. I’ve written
+several nasty 3,000-line abominations. I’ve written scads of functions in the 100 to 300
+line range. And I’ve written functions that were **20 to 30** lines long. What this experience
+has taught me, through long trial and error, is that functions should be very small.
+
+```java
+public static String renderPageWithSetupsAndTeardowns(PageData pageData, boolean isSuite) throws Exception {
+    if (isTestPage(pageData)){
+        includeSetupAndTeardownPages(pageData, isSuite);
+    }
+    return pageData.getHtml();
+ }
 ```
