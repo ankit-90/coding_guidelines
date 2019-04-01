@@ -19,11 +19,13 @@ good names.
  The name of a variable, function, or class, should answer all the big questions. It
 should tell you why it exists, what it does, and how it is used. If a name requires a comment,
 then the name does not reveal its intent. 
+
 ```java
 int d; // elapsed time in days
 ```
 The name d reveals nothing. It does not evoke a sense of elapsed time, nor of days. We
 should choose a name that specifies what is being measured and the unit of that measurement:
+
 ```java
 int elapsedTimeInDays;
 int daysSinceCreation;
