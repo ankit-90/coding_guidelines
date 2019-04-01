@@ -100,3 +100,13 @@ if (paycheck.isPosted()){
    ------
 }
 ```
+When constructors are overloaded, use static factory methods with names that
+describe the arguments. For example,
+```java
+Complex fulcrumPoint = Complex.FromRealNumber(23.0);
+```
+is generally better than
+```java
+Complex fulcrumPoint = new Complex(23.0);
+```
+Consider enforcing their use by making the corresponding constructors private.
