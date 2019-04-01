@@ -141,3 +141,44 @@ Cuteness in code often appears in the form of colloquialisms or slang. For examp
 don’t use the name *whack()* to mean *kill()*. Don’t tell little culture-dependent jokes like
 *eatMyShorts()* to mean *abort()*.
 Say what you mean. Mean what you say.
+
+# 3 Functions
+Functions are the first line of organization in any program, Consider the following example:
+
+```java
+ public static String testableHtml(PageData pageData,boolean includeSuiteSetup) throws Exception {
+    WikiPage wikiPage = pageData.getWikiPage();
+    StringBuffer buffer = new StringBuffer();
+    if (pageData.hasAttribute("Test")) {
+        if (includeSuiteSetup) {
+            WikiPage suiteSetup = PageCrawlerImpl.getInheritedPage(SuiteResponder.SUITE_SETUP_NAME, wikiPage);
+            if (suiteSetup != null) {
+                WikiPagePath pagePath = suiteSetup.getPageCrawler().getFullPath(suiteSetup);
+                String pagePathName = PathParser.render(pagePath);
+                buffer.append("!include -setup .")
+                    .append(pagePathName)
+                     .append("\n");
+            }
+        }
+        WikiPage setup = PageCrawlerImpl.getInheritedPage("SetUp", wikiPage);
+        if (setup != null) {
+            WikiPagePath setupPath = wikiPage.getPageCrawler().getFullPath(setup);
+            String setupPathName = PathParser.render(setupPath);
+            buffer.append("!include -setup .")
+                .append(setupPathName)
+                .append("\n");
+        }
+    }
+    buffer.append(pageData.getContent());
+    if (pageData.hasAttribute("Test")) {
+        WikiPage teardown = PageCrawlerImpl.getInheritedPage("TearDown", wikiPage);
+        if (teardown != null) {
+            WikiPagePath tearDownPath = wikiPage.getPageCrawler().getFullPath(teardown);
+            String tearDownPathName = PathParser.render(tearDownPath);
+            buffer.append("\n")
+                .append("!include -teardown .")
+                .append(tearDownPathName)
+                .append("\n");
+        }
+}
+```
