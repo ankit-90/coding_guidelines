@@ -55,3 +55,25 @@ Intelligent conversation is now possible: “Hey, Mikey, take a look at this rec
 timestamp is set to tomorrow’s date! How can that be?”
 
 * **Use Searchable Names** 
+Single-letter names and numeric constants have a particular problem in that they are not
+easy to locate across a body of text.
+One might easily grep for MAX_CLASSES_PER_STUDENT, but the number 7 could be more
+troublesome.
+If a variable or constant might be seen or used in multiple places in a body of code,
+it is imperative to give it a search-friendly name. Once again compare
+```java
+for (int j=0; j<34; j++) {
+s += (t[j]*4)/5;
+}
+```
+to
+```java
+int realDaysPerIdealDay = 4;
+const int WORK_DAYS_PER_WEEK = 5;
+int sum = 0;
+for (int j=0; j < NUMBER_OF_TASKS; j++) {
+int realTaskDays = taskEstimate[j] * realDaysPerIdealDay;
+int realTaskWeeks = (realdays / WORK_DAYS_PER_WEEK);
+sum += realTaskWeeks;
+}
+```
