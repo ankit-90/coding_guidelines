@@ -876,3 +876,80 @@ public int getDayOfMonth() {
 These comments are so noisy that we learn to ignore them. As we read through code, our
 eyes simply skip over them. Eventually the comments begin to lie as the code around them
 changes.
+
+Example below explains why the catch block
+is being ignored. But the second comment is pure noise. Apparently the programmer was
+just so frustrated with writing try/catch blocks in this function that he needed to vent.
+
+```java
+  private void startSending() {
+        try {
+            doSending();
+        } catch (SocketException e) {
+// normal. someone stopped the request.
+        } catch (Exception e) {
+            try {
+                response.add(ErrorResponder.makeExceptionString(e));
+                response.closeAll();
+            } catch (Exception e1) {
+//Give me a break!
+            }
+        }
+    }
+```
+
+* **Scary Noise**
+ They are just redundant noisy comments
+written out of some misplaced desire to provide documentation.
+
+```java
+/** The name. */
+private String name;
+/** The version. */
+private String version;
+/** The licenceName. */
+private String licenceName;
+/** The version. */
+private String info;
+```
+Read these comments again more carefully. Do you see the cut-paste error? If authors
+aren’t paying attention when comments are written (or pasted), why should readers be
+expected to profit from them?
+
+* **Don’t Use a Comment When You Can Use a Function or a Variable**
+Consider the following stretch of code:
+
+```java
+// does the module from the global list <mod> depend on the
+    // subsystem we are part of?
+    if(smodule.getDependSubsystems().contains(subSysMod.getSubSystem()))
+```
+
+This could be rephrased without the comment as
+
+```java
+ArrayList moduleDependees = smodule.getDependSubsystems();
+String ourSubSystem = subSysMod.getSubSystem();
+if (moduleDependees.contains(ourSubSystem))
+```
+The author of the original code may have written the comment first (unlikely) and then
+written the code to fulfill the comment. However, the author should then have refactored
+the code, as I did, so that the comment could be removed.
+
+* **Position Markers**
+Sometimes programmers like to mark a particular position in a source file. For example, I
+recently found this in a program I was looking through:
+
+```java
+// Actions //////////////////////////////////
+
+*****************************************
+*                                       *
+*****************************************
+```
+There are rare times when it makes sense to gather certain functions together beneath a
+banner like this. But in general they are clutter that should be eliminated—especially the
+noisy train of slashes at the end.
+Think of it this way. A banner is startling and obvious if you don’t see banners very
+often. So use them very sparingly, and only when the benefit is significant. If you overuse
+banners, they’ll fall into the background noise and be ignored.
