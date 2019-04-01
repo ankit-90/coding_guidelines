@@ -659,3 +659,29 @@ return
 
     buildList(text.substring(match.end()));
 ```
+
+* **Bad Comments**
+Most comments fall into this category. Usually they are crutches or excuses for poor code
+or justifications for insufficient decisions, amounting to little more than the programmer
+talking to himself.
+
+* **Mumbling**
+Plopping in a comment just because you feel you should or because the process requires it,
+is a hack. If you decide to write a comment, then spend the time necessary to make sure it
+is the best comment you can write. 
+
+Here, for example, is a case I found in FitNesse, where a comment might indeed have
+been useful. But the author was in a hurry or just not paying much attention. His mumbling
+left behind an enigma:
+
+```java
+public void loadProperties() {
+        try {
+            String propertiesPath = propertiesLocation + "/" + PROPERTIES_FILE;
+            FileInputStream propertiesStream = new FileInputStream(propertiesPath);
+            loadedProperties.load(propertiesStream);
+        } catch (IOException e) {
+// No properties files means all defaults are loaded
+        }
+    }
+```
