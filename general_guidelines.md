@@ -505,3 +505,118 @@ as clutter by automatically collapsing it.
 Comments like this should not be contracts or legal tomes. Where possible, refer to a standard
 license or other external document rather than putting all the terms and conditions
 into the comment.
+
+* **Informative Comments**
+It is sometimes useful to provide basic information with a comment. For example, consider
+this comment that explains the return value of an abstract method:
+```java
+// Returns an instance of the Responder being tested.
+protected abstract Responder responderInstance();
+```
+A comment like this can sometimes be useful, but it is better to use the name of the function
+to convey the information where possible. For example, in this case the comment
+could be made redundant by renaming the function: *responderBeingTested*.
+Here’s a case that’s a bit better:
+
+```java
+// format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile(
+ "\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*");
+```
+In this case the comment lets us know that the regular expression is intended to match a
+time and date that were formatted with the SimpleDateFormat.format function using the
+specified format string. Still, it might have been better, and clearer, if this code had been
+moved to a special class that converted the formats of dates and times. Then the comment
+would likely have been superfluous.
+
+* **Explanation of Intent**
+Sometimes a comment goes beyond just useful information about the implementation and
+provides the intent behind a decision. In the following case we see an interesting decision
+documented by a comment. When comparing two objects, the author decided that he
+wanted to sort objects of his class higher than objects of any other.
+
+```java
+public int compareTo(Object o) {
+        if (o instanceof WikiPagePath) {
+            WikiPagePath p =(WikiPagePath) o;
+            String compressedName = StringUtil . join (names, "");
+            String compressedArgumentName = StringUtil . join (p.names, "");
+            return compressedName.compareTo(compressedArgumentName);
+        }
+        return 1; // we are greater because we are the right type.
+    }
+```
+Here’s an even better example. You might not agree with the programmer’s solution to
+the problem, but at least you know what he was trying to do.
+
+```java
+ public void testConcurrentAddWidgets() throws Exception {
+        WidgetBuilder widgetBuilder =
+                new WidgetBuilder(new Class[]{BoldWidget.class});
+        String text = "'''bold text'''";
+        ParentWidget parent =
+                new BoldWidget(new MockWidgetRoot(), "'''bold text'''");
+        AtomicBoolean failFlag = new AtomicBoolean();
+        failFlag.set(false);
+        //This is our best attempt to get a race condition
+        //by creating large number of threads.
+        for (int i = 0; i < 25000; i++) {
+            WidgetBuilderThread widgetBuilderThread =
+                    new WidgetBuilderThread(widgetBuilder, text, parent, failFlag);
+            Thread thread = new Thread(widgetBuilderThread);
+            thread.start();
+        }
+        assertEquals(false, failFlag.get());
+    }
+```
+
+* **Clarification**
+Sometimes it is just helpful to translate the meaning of some obscure argument or return
+value into something that’s readable. In general it is better to find a way to make that argument
+or return value clear in its own right; but when its part of the standard library, or in
+code that you cannot alter, then a helpful clarifying comment can be useful.
+
+```java
+public void testCompareTo() throws Exception {
+        WikiPagePath a = PathParser.parse("PageA");
+        WikiPagePath ab = PathParser.parse("PageA.PageB");
+        WikiPagePath b = PathParser.parse("PageB");
+        WikiPagePath aa = PathParser.parse("PageA.PageA");
+        WikiPagePath bb = PathParser.parse("PageB.PageB");
+        WikiPagePath ba = PathParser.parse("PageB.PageA");
+        assertTrue(a.compareTo(a) == 0); // a == a
+        assertTrue(a.compareTo(b) != 0); // a != b
+        assertTrue(ab.compareTo(ab) == 0); // ab == ab
+        assertTrue(a.compareTo(b) == -1); // a < b
+        assertTrue(aa.compareTo(ab) == -1); // aa < ab
+        assertTrue(ba.compareTo(bb) == -1); // ba < bb
+        assertTrue(b.compareTo(a) == 1); // b > a
+        assertTrue(ab.compareTo(aa) == 1); // ab > aa
+        assertTrue(bb.compareTo(ba) == 1); // bb > ba
+    }
+```
+There is a substantial risk, of course, that a clarifying comment is incorrect. Go
+through the previous example and see how difficult it is to verify that they are correct. This
+explains both why the clarification is necessary and why it’s risky. So before writing comments
+like this, take care that there is no better way, and then take even more care that they
+are accurate.
+
+* **Warning of Consequences**
+Sometimes it is useful to warn other programmers
+about certain consequences. For
+example, here is a comment that explains
+why a particular test case is turned off:
+
+```java
+// Don't run unless you
+    // have some time to kill.
+    public void _testWithReallyBigFile() {
+        writeLinesToFile(10000000);
+        response.setBody(testFile);
+        response.readyToSend(this);
+        String responseString = output.toString();
+        assertSubString("Content-Length: 1000000000", responseString);
+        assertTrue(bytesSent > 1000000000);
+    }
+
+```
