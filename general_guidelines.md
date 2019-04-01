@@ -819,7 +819,7 @@ comments accumulate as a kind of journal, or log, of every change that has ever 
 made. I have seen some modules with dozens of pages of these run-on journal entries. 
 
 ```java
-* Changes (from 11-Oct-2001)
+/* Changes (from 11-Oct-2001)
  * --------------------------
  * 11-Oct-2001 : Re-organised the class and moved it to new package
  * com.jrefinery.date (DG);
@@ -865,7 +865,7 @@ No, really? Or how about this:
 And then there’s this paragon of redundancy:
 
 ```java
- * Returns the day of the month.
+ /* Returns the day of the month.
  *
  * @return the day of the month.
  */
