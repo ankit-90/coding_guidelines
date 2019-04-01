@@ -5,6 +5,9 @@ After years of experience of Software Development, I came to know that irrespect
  * Naming Convention
  * Functions
  * Comments
+ * Formatting
+ * Error/Exception Handling
+ * Coding Myths
  
  # 2. Naming Conventions
 Names are everywhere in software. We name our variables, our functions, our arguments,
