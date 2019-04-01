@@ -258,3 +258,50 @@ favorable restructuring of the code.
 Be consistent in your names. Use the same phrases, nouns, and verbs in the function
 names you choose for your modules. Consider, for example, the names *includeSetupAndTeardownPages,
 includeSetupPages, includeSuiteSetupPage, and includeSetupPage*.
+
+* **Function Arguments**
+The ideal number of arguments for a function is
+*zero (niladic)*. Next comes *one (monadic)*, followed
+closely by *two (dyadic). Three arguments (triadic)*
+should be avoided where possible. More than three
+(polyadic) requires very special justification—and
+then shouldn’t be used anyway.
+Arguments are hard. They take a lot of conceptual
+power. That’s why I got rid of almost all of
+them from the example. Consider, for instance, the
+StringBuffer in the example. We could have
+passed it around as an argument rather than making
+it an instance variable, but then our readers
+would have had to interpret it each time they saw
+it. When you are reading the story told by the
+module, *includeSetupPage()* is easier to understand than *includeSetupPageInto(newPageContent)*.
+The argument is at a different level of abstraction than the function name and
+forces you to know a detail (in other words, StringBuffer) that isn’t particularly important
+at that point.
+
+* **Flag Arguments**
+Flag arguments are ugly. Passing a boolean into a function is a truly terrible practice. It
+immediately complicates the signature of the method, loudly proclaiming that this function
+does more than one thing. It does one thing if the flag is true and another if the flag is false! For example:
+
+```java
+public void enableUiControls(boolean isEnabled){
+    if(isEnabled == true){
+        ---------
+        --------
+    }else{
+        -------
+        --------
+        --------
+    }
+}
+```
+In this example you can see if value of *isEnabled* is true then we are enabling UI controls and also in near future there can be added functionality we have to do based on the flag. In that case it will get messy over the period of time. A better approach would be to write seperate functions for enable and disable state. For example:
+
+```java
+if(isEnabled == true){
+    enableUiControls();
+}else{
+    disableUiControls();
+}
+```
