@@ -94,7 +94,7 @@ set, and is according to the javabean standard*.
 
 ```java
 String name = employee.getName();
-customer.setName("mike");
+customer.setName("Ajay");
 if (paycheck.isPosted()){
    ------
    ------
