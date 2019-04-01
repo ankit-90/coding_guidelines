@@ -305,3 +305,9 @@ if(isEnabled == true){
     disableUiControls();
 }
 ```
+
+* **Dyadic Functions** *(Fucntions with two parameters)*<br/>
+//TODO
+
+* **Triads** *(Functions with three paramters)*<br/>
+//TODO
