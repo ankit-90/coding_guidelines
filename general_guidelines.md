@@ -670,10 +670,6 @@ Plopping in a comment just because you feel you should or because the process re
 is a hack. If you decide to write a comment, then spend the time necessary to make sure it
 is the best comment you can write. 
 
-Here, for example, is a case I found in FitNesse, where a comment might indeed have
-been useful. But the author was in a hurry or just not paying much attention. His mumbling
-left behind an enigma:
-
 ```java
 public void loadProperties() {
         try {
@@ -684,4 +680,100 @@ public void loadProperties() {
 // No properties files means all defaults are loaded
         }
     }
+```
+* **Redundant Comments**
+ A simple function with a header comment that is completely redundant.
+The comment probably takes longer to read than the code itself.
+
+```java
+
+    // Utility method that returns when this.closed is true. Throws an exception
+// if the timeout is reached.
+    public synchronized void waitForClose(final long timeoutMillis)
+            throws Exception {
+        if (!closed) {
+            wait(timeoutMillis);
+            if (!closed)
+                throw new Exception("MockResponseSender could not be closed");
+        }
+    }
+```
+What purpose does this comment serve? It’s certainly not more informative than the
+code. It does not justify the code, or provide intent or rationale. It is not easier to read than
+the code. Indeed, it is less precise than the code and entices the reader to accept that lack of
+precision in lieu of true understanding. It is rather like a gladhanding used-car salesman
+assuring you that you don’t need to look under the hood. 
+
+Some more examples:
+
+```java
+public abstract class ContainerBase implements Container, Lifecycle, Pipeline,
+        MBeanRegistration, Serializable {
+    /**
+     * The processor delay for this component.
+     */
+    protected int backgroundProcessorDelay = -1;
+    /**
+     * The lifecycle event support for this component.
+     */
+    protected LifecycleSupport lifecycle =
+            new LifecycleSupport(this);
+    /**
+     * The container event listeners for this Container.
+     */
+    protected ArrayList listeners = new ArrayList();
+    /**
+     * The Loader implementation with which this Container is
+     * associated.
+     */
+    protected Loader loader = null;
+    /**
+     * The Logger implementation with which this Container is
+     * associated.
+     */
+    protected Log logger = null;
+    /**
+     * Associated logger name.
+     */
+    protected String logName = null;
+
+    /**
+     * The Manager implementation with which this Container is
+     * associated.
+     */
+    protected Manager manager = null;
+    /**
+     * The cluster with which this Container is associated.
+     */
+    protected Cluster cluster = null;
+    /**
+     * The human-readable name of this Container.
+     */
+    protected String name = null;
+    /**
+     * The parent Container to which this Container is a child.
+     */
+    protected Container parent = null;
+    /**
+     * The parent class loader to be configured when we install a
+     * Loader.
+     */
+    protected ClassLoader parentClassLoader = null;
+    /**
+     * The Pipeline object with which this Container is
+     * associated.
+     */
+    protected Pipeline pipeline = new StandardPipeline(this);
+    /**
+     * The Realm with which this Container is associated.
+     */
+    protected Realm realm = null;
+    /**
+     * The resources DirContext object with which this Container
+     * is associated.
+     */
+    protected DirContext resources = null;
+}
+
+
 ```
