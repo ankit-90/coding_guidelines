@@ -777,3 +777,74 @@ public abstract class ContainerBase implements Container, Lifecycle, Pipeline,
 
 
 ```
+
+* **Misleading Comments**
+Sometimes, with all the best intentions, a programmer makes a statement in his comments
+that isn’t precise enough to be accurate. 
+This subtle bit of misinformation, couched in a comment that is harder to read than
+the body of the code, could cause another programmer to blithely call this function in the
+expectation that it will return as soon as this.closed becomes true. That poor programmer
+would then find himself in a debugging session trying to figure out why his code executed
+so slowly
+
+* **Mandated Comments**
+It is just plain silly to have a rule that says that every function must have a javadoc, or
+every variable must have a comment. Comments like this just clutter up the code, propagate
+lies, and lend to general confusion and disorganization. 
+
+This clutter adds nothing and serves only to obfuscate the code and create the
+potential for lies and misdirection.
+
+```java
+/*
+     * @param title The title of the CD
+     * @param author The author of the CD
+     * @param tracks The number of tracks on the CD
+     * @param durationInMinutes The duration of the CD in minutes
+     */
+    public void addCD(String title, String author,
+                      int tracks, int durationInMinutes) {
+        CD cd = new CD();
+        cd.title = title;
+        cd.author = author;
+        cd.tracks = tracks;
+        cd.duration = duration;
+        cdList.add(cd);
+    }
+```
+
+* **Journal Comments**
+Sometimes people add a comment to the start of a module every time they edit it. These
+comments accumulate as a kind of journal, or log, of every change that has ever been
+made. I have seen some modules with dozens of pages of these run-on journal entries. 
+
+```java
+* Changes (from 11-Oct-2001)
+ * --------------------------
+ * 11-Oct-2001 : Re-organised the class and moved it to new package
+ * com.jrefinery.date (DG);
+ * 05-Nov-2001 : Added a getDescription() method, and eliminated NotableDate
+ * class (DG);
+ * 12-Nov-2001 : IBD requires setDescription() method, now that NotableDate
+ * class is gone (DG); Changed getPreviousDayOfWeek(),
+ * getFollowingDayOfWeek() and getNearestDayOfWeek() to correct
+ * bugs (DG);
+ * 05-Dec-2001 : Fixed bug in SpreadsheetDate class (DG);
+ * 29-May-2002 : Moved the month constants into a separate interface
+ * (MonthConstants) (DG);
+ * 27-Aug-2002 : Fixed bug in addMonths() method, thanks to N???levka Petr (DG);
+ * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
+ * 13-Mar-2003 : Implemented Serializable (DG);
+ * 29-May-2003 : Fixed bug in addMonths method (DG);
+ * 04-Sep-2003 : Implemented Comparable. Updated the isInRange javadocs (DG);
+ * 05-Jan-2005 : Fixed bug in addYears() method (1096282) (DG);
+```
+
+Long ago there was a good reason to create and maintain these log entries at the start
+of every module. We didn’t have source code control systems that did it for us. Nowadays,
+however, these long journals are just more clutter to obfuscate the module. They should be
+completely removed.
+
+* **Noise Comments**
+Sometimes you see comments that are nothing but noise. They restate the obvious and
+provide no new information.
