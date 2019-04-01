@@ -311,3 +311,16 @@ if(isEnabled == true){
 
 * **Triads** *(Functions with three paramters)*<br/>
 //TODO
+
+* **Argument Objects**
+When a function seems to need more than two or three arguments, it is likely that some of
+those arguments ought to be wrapped into a class of their own. Consider, for example, the
+difference between the two following declarations:
+```java
+Circle makeCircle(double x, double y, double radius);
+Circle makeCircle(Point center, double radius);
+```
+Reducing the number of arguments by creating objects out of them may seem like
+cheating, but it’s not. When groups of variables are passed together, the way x and
+y are in the example above, they are likely part of a concept that deserves a name of its
+own.
