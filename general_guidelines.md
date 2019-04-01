@@ -404,4 +404,99 @@ better for appendFooter to be invoked as
 report.appendFooter();
 ```
 In general output arguments should be avoided. If your function must change the state
-of something, have it change the state of its owning object. 
+of something, have it change the state of its owning object.
+
+# 4. Comments
+*Don't comment bad code, review it*. Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module
+more than frivolous dogmatic comments. Nothing can be quite so damaging as an old
+crufty comment that propagates lies and misinformation.
+The proper use of comments is to compensate for our failure to express ourself in
+code. Note that I used the word **failure**. I meant it. Comments are always failures. We must
+have them because we cannot always figure out how to express ourselves without them,
+but their use is not a cause for celebration. 
+
+So when you find yourself in a position where you need to write a comment, think it
+through and see whether there isn’t some way to turn the tables and express yourself in
+code. Every time you express yourself in code, you should pat yourself on the back. Every
+time you write a comment, you should grimace and feel the failure of your ability of
+expression.
+Why am I so down on comments? Because they lie. Not always, and not intentionally,
+but too often. The older a comment is, and the farther away it is from the code it describes,
+the more likely it is to be just plain wrong. The reason is simple. Programmers can’t realistically
+maintain them.
+Code changes and evolves. Chunks of it move from here to there. Those chunks bifurcate
+and reproduce and come together again to form chimeras. Unfortunately the comments
+don’t always follow them—can’t always follow them. And all too often the
+comments get separated from the code they describe and become orphaned blurbs of everdecreasing
+accuracy. For example, look what has happened to this comment and the line it
+was intended to describe:
+
+```java
+  MockRequest request;
+    private final String HTTP_DATE_REGEXP =
+    "[SMTWF][a-z]{2}\\,\\s[0-9]{2}\\s[JFMASOND][a-z]{2}\\s"+
+    "[0-9]{4}\\s[0-9]{2}\\:[0-9]{2}\\:[0-9]{2}\\sGMT";
+    private Response response;
+    private FitNesseContext context;
+    private FileResponder responder;
+    private Locale saveLocale;
+    // Example: "Tue, 02 Apr 2003 22:18:49 GMT"
+```   
+Other instance variables that were probably added later were interposed between the
+**HTTP_DATE_REGEXP** constant and it’s explanatory comment.
+It is possible to make the point that programmers should be disciplined enough to
+keep the comments in a high state of repair, relevance, and accuracy. I agree, they should.
+But I would rather that energy go toward making the code so clear and expressive that it
+does not need the comments in the first place.
+Inaccurate comments are far worse than no comments at all. They delude and mislead.
+They set expectations that will never be fulfilled. They lay down old rules that need not, or
+should not, be followed any longer.
+Truth can only be found in one place: the code. Only the code can truly tell you what
+it does. It is the only source of truly accurate information. Therefore, though comments are
+sometimes necessary, we will expend significant energy to minimize them.
+
+* **Comments Do Not Make Up for Bad Code**
+One of the more common motivations for writing comments is bad code. We write a module
+and we know it is confusing and disorganized. We know it’s a mess. So we say to ourselves,
+“Ooh, I’d better comment that!” No! You’d better clean it!
+Clear and expressive code with few comments is far superior to cluttered and complex
+code with lots of comments. Rather than spend your time writing the comments that
+explain the mess you’ve made, spend it cleaning that mess.
+
+* **Explain Yourself in Code**
+There are certainly times when code makes a poor vehicle for explanation. Unfortunately,
+many programmers have taken this to mean that code is seldom, if ever, a good means for
+explanation. This is patently false. Which would you rather see? This:
+```java
+// Check to see if the employee is eligible for full benefits
+if ((employee.flags & HOURLY_FLAG) && (employee.age > 65)) 
+```
+Or this?
+
+```java
+if (employee.isEligibleForFullBenefits())
+```
+It takes only a few seconds of thought to explain most of your intent in code. In many
+cases it’s simply a matter of creating a function that says the same thing as the comment
+you want to write.
+
+* **Good Comments**
+Some comments are necessary or beneficial. We’ll look at a few that I consider worthy of
+the bits they consume. Keep in mind, however, that the only truly good comment is the
+comment you found a way not to write.
+
+* **Legal Comments**
+Sometimes our corporate coding standards force us to write certain comments for legal
+reasons. For example, copyright and authorship statements are necessary and reasonable
+things to put into a comment at the start of each source file.
+Here, for example, is the standard comment header that we put at the beginning of
+every source file in FitNesse. I am happy to say that our IDE hides this comment from acting
+as clutter by automatically collapsing it.
+
+```java
+// Copyright (C) 2003,2004,2005 by Object Mentor, Inc. All rights reserved.
+// Released under the terms of the GNU General Public License version 2 or later.
+```
+Comments like this should not be contracts or legal tomes. Where possible, refer to a standard
+license or other external document rather than putting all the terms and conditions
+into the comment.
