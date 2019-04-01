@@ -407,7 +407,10 @@ In general output arguments should be avoided. If your function must change the 
 of something, have it change the state of its owning object.
 
 # 4. Comments
-*Don't comment bad code, review it*. Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module
+*Don't comment bad code, review it*.<br/>
+*Code never lies, comments sometimes do.*<br/>
+*Code is like joke, it is bad if you have to explain it.*<br/>
+Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module
 more than frivolous dogmatic comments. Nothing can be quite so damaging as an old
 crufty comment that propagates lies and misinformation.
 The proper use of comments is to compensate for our failure to express ourself in
