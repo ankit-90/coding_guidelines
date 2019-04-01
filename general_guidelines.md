@@ -206,3 +206,31 @@ public static String renderPageWithSetupsAndTeardowns(PageData pageData, boolean
     return pageData.getHtml();
  }
 ```
+* **Blocks and Indenting**
+This implies that the blocks within if statements, else statements, while statements, and
+so on should be one line long. Probably that line should be a function call. Not only does
+this keep the enclosing function small, but it also adds documentary value because the
+function called within the block can have a nicely descriptive name.
+This also implies that functions should not be large enough to hold nested structures.
+Therefore, the indent level of a function should not be greater than one or two. This, of
+course, makes the functions easier to read and understand. Consider the following example:
+
+```java
+if(data.code == Constants.API_SUCCESS && data.message.equals("success")){
+    --------
+    --------
+    --------
+}
+```
+to
+
+```java
+if(isSuccess(data)){
+    -------
+    -------
+    -------
+}
+```
+* **Do One Thing**
+*FUNCTIONS SHOULD DO ONE THING. THEY SHOULD DO IT WELL.
+THEY SHOULD DO IT ONLY*. The problem with this statement is that it is hard to know what “one thing” is. 
