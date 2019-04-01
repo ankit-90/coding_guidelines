@@ -100,21 +100,6 @@ if (paycheck.isPosted()){
    ------
 }
 ```
-* **Final Words**
-The hardest thing about choosing good names is that it requires good descriptive skills and
-a shared cultural background. This is a teaching issue rather than a technical, business, or
-management issue. As a result many people in this field don’t learn to do it very well.
-People are also afraid of renaming things for fear that some other developers will
-object. We do not share that fear and find that we are actually grateful when names change
-(for the better). Most of the time we don’t really memorize the names of classes and methods.
-We use the modern tools to deal with details like that so we can focus on whether the
-code reads like paragraphs and sentences, or at least like tables and data structure (a sentence
-isn’t always the best way to display data). You will probably end up surprising someone
-when you rename, just like you might with any other code improvement. Don’t let it
-stop you in your tracks.
-Follow some of these rules and see whether you don’t improve the readability of your
-code. If you are maintaining someone else’s code, use refactoring tools to help resolve these
-problems. It will pay off in the short term and continue to pay in the long run.
 
 When constructors are overloaded, use static factory methods with names that
 describe the arguments. For example,
@@ -141,6 +126,22 @@ Cuteness in code often appears in the form of colloquialisms or slang. For examp
 don’t use the name *whack()* to mean *kill()*. Don’t tell little culture-dependent jokes like
 *eatMyShorts()* to mean *abort()*.
 Say what you mean. Mean what you say.
+
+* **Final Words**
+The hardest thing about choosing good names is that it requires good descriptive skills and
+a shared cultural background. This is a teaching issue rather than a technical, business, or
+management issue. As a result many people in this field don’t learn to do it very well.
+People are also afraid of renaming things for fear that some other developers will
+object. We do not share that fear and find that we are actually grateful when names change
+(for the better). Most of the time we don’t really memorize the names of classes and methods.
+We use the modern tools to deal with details like that so we can focus on whether the
+code reads like paragraphs and sentences, or at least like tables and data structure (a sentence
+isn’t always the best way to display data). You will probably end up surprising someone
+when you rename, just like you might with any other code improvement. Don’t let it
+stop you in your tracks.
+Follow some of these rules and see whether you don’t improve the readability of your
+code. If you are maintaining someone else’s code, use refactoring tools to help resolve these
+problems. It will pay off in the short term and continue to pay in the long run.
 
 # 3. Functions
 Functions are the first line of organization in any program.Consider the following example:
