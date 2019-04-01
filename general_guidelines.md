@@ -77,3 +77,7 @@ for (int j=0; j < NUMBER_OF_TASKS; j++) {
     sum += realTaskWeeks;
 }
 ```
+Note that sum, above, is not a particularly useful name but at least is searchable. The
+intentionally named code makes for a longer function, but consider how much easier it
+will be to find **WORK_DAYS_PER_WEEK** than to find all the places where 5 was used and filter
+the list down to just the instances with the intended meaning.
